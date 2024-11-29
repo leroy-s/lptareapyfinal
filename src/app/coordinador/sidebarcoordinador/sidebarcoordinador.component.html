@@ -1,0 +1,90 @@
+<!-- Barra superior -->
+<div class="topbar">
+    <div class="topbar-left">
+        <button pButton icon="pi pi-bars" class="menu-toggle-button" (click)="toggleSidebar()"></button>
+        <img src="icons/logo.png" alt="Logo" class="topbar-logo">
+    </div>
+    <div class="topbar-right">
+        <i class="pi pi-th-large grid-icon" (click)="overlayPanel.toggle($event)"></i>
+        
+        <span class="font-bold">Coordinador</span>
+        <p-avatar image="icons/image.png" shape="circle"></p-avatar>
+        
+        <p-overlayPanel #overlayPanel>
+            <div class="overlay-content">
+                <!-- Botón de Cerrar sesión sin estilos adicionales -->
+                <button class="logout-button" (click)="onLogout()">Cerrar sesión</button>
+            </div>
+        </p-overlayPanel>
+    </div>
+</div>
+
+
+
+<!-- Barra lateral -->
+<div class="sidebar-container" [ngClass]="{'collapsed': isCollapsed}">
+    <div class="menu-items">
+      <a [routerLink]="['./home']"
+       class="menu-item p-d-flex p-ai-center p-jc-start"
+       [ngClass]="{'selected': selectedItem === 'usuarios'}"
+       (click)="selectItem('usuarios')">
+      <i class="pi pi-user p-mr-2"></i>
+      <span class="menu-text">Inicio</span>
+    </a>
+
+    <a [routerLink]="['./practicante-ep']"
+       class="menu-item p-d-flex p-ai-center p-jc-start"
+       [ngClass]="{'selected': selectedItem === 'practicante-ep'}"
+       (click)="selectItem('practicante-ep')">
+      <i class="pi pi-folder-open p-mr-2"></i>
+      <span class="menu-text">Registro de Practicantes</span>
+    </a>
+
+    <a [routerLink]="['./coordinador-asignar']"
+       class="menu-item p-d-flex p-ai-center p-jc-start"
+       [ngClass]="{'selected': selectedItem === 'coordinador-asignar'}"
+       (click)="selectItem('coordinador-asignar')">
+      <i class="pi pi-th-large p-mr-2"></i>
+      <span class="menu-text">Asignar</span>
+    </a>
+
+    <div class="menu-item p-d-flex p-ai-center p-jc-start" (click)="toggleSubMenu('gestionar')">
+      <i class="pi pi-th-large p-mr-2"></i>
+      <span class="menu-text">Gestionar</span>
+      <i class="pi" [ngClass]="{'pi-chevron-down': selectedItem !== 'gestionar', 'pi-chevron-up': selectedItem === 'gestionar'}" style="margin-left:auto"></i>
+    </div>
+
+  
+    <div class="submenu" *ngIf="selectedItem === 'gestionar'">
+      <a [routerLink]="['./validacion']"
+         class="submenu-item p-d-flex p-ai-center p-jc-start"
+         [ngClass]="{'selected': subSelectedItem === 'validacionEmpresas'}"
+         (click)="selectSubItem('validacionEmpresas')">
+        <i class="pi pi-check-circle p-mr-2"></i>
+        <span class="menu-text">Requerimientos de Practicas</span>
+      </a>
+      <a [routerLink]="['./crearRubricas']"
+         class="submenu-item p-d-flex p-ai-center p-jc-start"
+         [ngClass]="{'selected': subSelectedItem === 'crearRubricas'}"
+         (click)="selectSubItem('crearRubricas')">
+        <i class="pi pi-pencil p-mr-2"></i>
+        <span class="menu-text">Crear Rúbricas de Evaluación</span>
+      </a>
+    </div>
+
+   
+    <a [routerLink]="['./correo']"
+       class="menu-item p-d-flex p-ai-center p-jc-start"
+       [ngClass]="{'selected': selectedItem === 'correo'}"
+       (click)="selectItem('correo')">
+      <i class="pi pi-envelope p-mr-2"></i>
+      <span class="menu-text">Correo</span>
+    </a>
+
+    </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+    <router-outlet></router-outlet>
+</div>

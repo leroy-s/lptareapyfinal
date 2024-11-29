@@ -1,0 +1,13 @@
+<div *ngIf="isRedirected; else redirect">
+    <app-sidebarpracticante></app-sidebarpracticante>
+  </div>
+  
+  <ng-template #redirect>
+    <!-- Vista de redireccionamiento -->
+    <app-redireccionamientopracticante (onRedirect)="redirectToSidebarpracticante()"></app-redireccionamientopracticante>
+  </ng-template>
+  
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  

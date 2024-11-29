@@ -1,0 +1,25 @@
+/* Elimina márgenes y paddings del body y html */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Evita scrollbars */
+}
+
+/* Ajusta el contenedor principal */
+.login-container {
+  min-height: 100vh; /* Altura completa de la ventana */
+  min-width: 100vw; /* Anchura completa de la ventana */
+  background-image: url('./fonfo.jpg'); /* Ruta a tu imagen */
+  background-size: cover; /* Escala la imagen para cubrir todo */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  background-position: center center; /* Centra la imagen */
+  display: flex; /* Centrado del contenido */
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* Fija la imagen al fondo */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Coloca la imagen detrás del contenido */
+}

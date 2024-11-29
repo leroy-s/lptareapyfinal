@@ -1,0 +1,13 @@
+/* En tu archivo CSS del componente */
+
+.button-container {
+  position: fixed;
+  top: 45px;
+  right: calc(0px + 2px); /* Ajusta 250px al ancho del menú si es necesario */
+  z-index: 1000;
+}
+.button-container p-button .p-button {
+  width: 6rem !important;
+  padding: 0.3rem !important;
+  font-size: 0.8rem !important;
+}

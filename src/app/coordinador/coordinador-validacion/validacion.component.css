@@ -1,0 +1,41 @@
+.requerimientos-container {
+  position: fixed;
+  top: 60px; /* Ajusta esta posición según la altura de la barra superior */
+  left: 220px; /* Ajusta esta posición según el ancho de la barra lateral */
+  width: calc(100% - 220px); /* Deja espacio para la barra lateral */
+  background-color: white;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #d4d4d4;
+}
+
+.active {
+  background-color: #c4c4c4;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.content-container {
+  margin-top: 120px; /* Deja espacio debajo de la barra fija */
+  padding: 20px;
+}

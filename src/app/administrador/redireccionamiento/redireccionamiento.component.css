@@ -1,0 +1,111 @@
+@import "primeicons/primeicons.css";
+
+/* Desactiva completamente el desplazamiento */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Impide el desplazamiento en toda la página */
+  box-sizing: border-box;
+}
+
+.user-redirect-container {
+  display: flex;
+  position: fixed; /* Fija el contenedor en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* Asegura que no haya desplazamiento interno */
+}
+.user-redirect-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .left-panel {
+    flex: 1;
+    display: flex;
+    align-items: flex-start; /* Alinea el contenido hacia la parte superior */
+    justify-content: flex-start; /* Alinea el contenido hacia la izquierda */
+    background-color: #f0f0f0;
+    padding: 20px;
+    position: relative;
+  }
+
+  .role-card {
+    width: 200px;
+    text-align: center;
+    position: absolute; /* Coloca el contenedor en la esquina superior izquierda de .left-panel */
+    top: 40px;
+    left: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar el contenedor */
+  }
+
+
+.right-panel {
+    flex-basis: 300px; /* Ajusta el ancho del panel derecho */
+    max-width: 300px; /* Asegura que no sea más ancho de lo especificado */
+    background-color: #0b1e41;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh;
+  }
+
+.logo {
+  width: 80%;
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-icon {
+  font-size: 5em;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.user-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.user-location {
+  font-size: 0.9em;
+  color: #b0b0b0;
+}
+
+::ng-deep .logout-button {
+    background-color: #ffa500 !important;
+    color: #fff !important;
+    font-size: 0.9em;
+    padding: 0.5em 1.5em;
+    border: none !important;
+    border-radius: 5px;
+    box-shadow: none !important; /* Elimina sombras */
+    outline: none !important; /* Elimina cualquier borde de enfoque */
+}
+
+::ng-deep .logout-button:focus,
+::ng-deep .logout-button .p-button:focus {
+    outline: none !important;
+    box-shadow: none !important; /* Elimina cualquier sombra de enfoque */
+}
+
+::ng-deep .p-button.p-focus {
+    box-shadow: none !important; /* Asegura que no haya sombra en el foco */
+    outline: none !important;
+}

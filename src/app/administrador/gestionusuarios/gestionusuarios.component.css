@@ -1,0 +1,120 @@
+.main-container {
+  display: flex;
+  gap: 20px;
+  overflow-y: hidden;
+  margin-top: 20px;
+}
+
+.persona-form-container {
+  width: 300px;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.user-list-container {
+  width: 620px;
+  flex-grow: 1;
+  height: 470px;
+  overflow-y: auto;
+}
+
+.floating-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #001f3f;
+  color: #fff;
+}
+
+.button-container {
+  position: fixed;
+  top: 45px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.compact-list {
+  max-height: 120px;
+  overflow-y: auto;
+  background-color: #f2f2f2;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f2f2f2;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.85em;
+  background-color: #d3cce3;
+}
+
+.confirm-button {
+  background-color: #001f3f;
+  color: #fff;
+  font-size: 0.85em;
+}
+
+.input-field {
+  height: 1.8em;
+  font-size: 0.85em;
+}
+
+.compact-form .field {
+  margin-bottom: 5px;
+}
+
+h5.mt-4 {
+  margin-bottom: 5px;
+}
+
+.compact-list {
+  margin-top: 0;
+}
+
+/* Agregar estos estilos al final del archivo */
+.surface-100 {
+  background-color: #f8f9fa;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #ccc;
+}
+
+.text-500 {
+  color: #6c757d;
+  font-size: 0.85em;
+  font-style: italic;
+}
+/* En tu archivo CSS del componente */
+.button-container {
+  position: fixed;
+  top: 45px;
+  right: calc(0px + 2px); /* Ajusta 250px al ancho del menú si es necesario */
+  z-index: 1000;
+}
+.button-container p-button .p-button {
+  width: 6rem !important;
+  padding: 0.3rem !important;
+  font-size: 0.8rem !important;
+}
+.p-button-raised {
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}

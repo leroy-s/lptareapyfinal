@@ -1,0 +1,138 @@
+.calendar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .calendar-header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .calendar-day {
+    height: 100px;
+    border: 1px solid var(--surface-border);
+    padding: 0.5rem;
+    position: relative;
+  }
+
+  .day-number {
+    font-weight: bold;
+    color: var(--text-color);
+  }
+
+  .current-month {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .week-view .week-day-header {
+    padding: 1rem;
+    background-color: var(--surface-100);
+    border: 1px solid var(--surface-border);
+    border-radius: 4px 4px 0 0;
+  }
+
+  .week-view .week-day-content {
+    height: 600px;
+    border: 1px solid var(--surface-border);
+    border-top: none;
+  }
+
+  .day-view .hour-slot {
+    height: 60px;
+    padding: 0.5rem;
+    border-right: 1px solid var(--surface-border);
+    color: var(--text-color-secondary);
+    font-weight: 600;
+  }
+
+  .day-view .hour-content {
+    height: 60px;
+    border-bottom: 1px solid var(--surface-border);
+    background-color: var(--surface-50);
+    position: relative;
+  }
+  @keyframes snowfall {
+    0% {
+      transform: translateY(-10px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(10px) rotate(360deg);
+    }
+  }
+  
+  body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-color: var(--surface-ground);
+  }
+  
+  .christmas-highlight {
+    position: relative;
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.1), rgba(0, 128, 0, 0.1)) !important;
+    border: 2px solid #c41e3a !important;
+  }
+  
+  .christmas-highlight::before {
+    content: "🎄";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 1.2rem;
+    animation: snowfall 3s infinite alternate ease-in-out;
+    z-index: 1;
+  }
+  
+  .christmas-time-indicator {
+    position: relative;
+    border-top: 2px dashed #c41e3a !important;
+  }
+  
+  .christmas-time-indicator::after {
+    content: "🎅";
+    position: absolute;
+    right: 5px;
+    top: -12px;
+    font-size: 1.2rem;
+    animation: snowfall 2s infinite alternate ease-in-out;
+    z-index: 1;
+  }
+ @keyframes twinkle {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+  
+  .p-button[severity="info"],
+.p-button[severity="primary"] {
+  background-color: #002B55 !important;  /* Azul oscuro */
+  color: #ffffff !important; /* Texto blanco */
+  border: 1px solid #002B55; /* Borde en azul oscuro */
+}
+.p-button[severity="info"]:hover,
+.p-button[severity="primary"]:hover {
+  background-color: #003366 !important; /* Azul más oscuro en hover */
+  border-color: #003366; /* Borde más oscuro en hover */
+}
+.p-button[severity="secondary"]:hover {
+    background-color: #003366; /* Azul más suave para secundario */
+    color: #ffffff !important;
+  }
+  .calendar-header {
+    background-color: #003366;  /* Azul oscuro para el header del calendario */
+    color: #ffffff;  /* Texto blanco */
+  }
+  
+  .christmas-highlight {
+    background-color: #002B55; /* Azul oscuro para resaltar el día actual o seleccionado */
+    color: #ffffff;
+  }
+  .calendar-day:hover {
+    background-color: #d87a7a; /* Azul más suave al pasar el ratón */
+    color: #ffffff;
+  }

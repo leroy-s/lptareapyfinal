@@ -1,0 +1,59 @@
+<h4 style="font-size: 1em; font-weight: bold; text-align: left; margin: 0; padding-left: 1rem; margin-top: -0rem;">
+  Gestión de reportes
+</h4>
+
+<!-- Botón de Regresar -->
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+  <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button" (click)="onBack()" 
+            [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+  </p-button>
+</div>
+
+<!-- Barra Horizontal -->
+<div class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3" style="width: 100%; max-width: 10000px; margin-top: 0.5rem">
+  <div class="career-info flex align-items-center gap-2 p-2 surface-card border-round shadow-2" style="background-color: #f5f5f5; color: #666;">
+    <span>{{ userCareer || 'Cargando...' }}</span> <!-- Carrera -->
+    <span class="text-sm" style="color: #999;">{{ period || '2024' }}</span> <!-- Periodo -->
+  </div>
+
+  <!-- Dropdown para seleccionar línea -->
+  <p-dropdown 
+    [options]="years" 
+    [(ngModel)]="selectedYear" 
+    (onChange)="onLineaChange()" 
+    [style]="{'width': '250px', 'height': '33px'}" 
+    styleClass="text-left" 
+    placeholder="Seleccionar Línea">
+</p-dropdown>
+
+
+</div>
+
+<!-- Contenedor de lista de alumnos y contenedor vacío al costado -->
+<div class="flex" style="gap: 1rem; width: 100%; height: 490px; margin-top: 1rem; align-items: stretch;">
+  <!-- Lista de estudiantes -->
+  <div class="list-container surface-card border-round shadow-2 p-3" style="flex: 0 0 300px; overflow-y: auto;">
+    <!-- Barra de búsqueda -->
+    <div class="flex align-items-center p-input-icon-left mb-3" style="position: sticky; top: 0; background-color: #fff; z-index: 9; padding-top: 0.9rem;">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" placeholder="Buscar alumno" [(ngModel)]="searchQuery" class="w-full"/>
+    </div>
+
+    <!-- Lista de estudiantes -->
+    <div *ngFor="let estudiante of filteredItems" class="flex align-items-center justify-content-between mb-2 p-2 border-round shadow-1" style="background-color: #f5f5f5;">
+      <span class="p-avatar p-avatar-circle" style="background-color: #dcdcdc; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+        {{ estudiante.nombre.charAt(0) }}
+      </span>
+      <span class="flex-grow-1 ml-2">{{ estudiante.nombre }} {{ estudiante.apellido }}</span>
+      <button pButton icon="pi pi-eye" class="p-button-text p-button-sm" style="color: #007ad9;" (click)="selectItem(estudiante)"></button>
+    </div>
+  </div>
+
+  <!-- Contenedor vacío al lado de la lista -->
+  <div class="empty-container flex align-items-center justify-content-center surface-card border-round shadow-2 p-3" 
+       style="flex-grow: 1; background-color: #ffffff;">
+    <span *ngIf="!selectedStudent && showTooltip" class="p-button-text p-3" style="background-color: #ffebee; color: #b71c1c; border-radius: 5px; font-weight: bold;">
+      Selecciona un estudiante para ver más detalles.
+    </span>
+  </div>
+</div>

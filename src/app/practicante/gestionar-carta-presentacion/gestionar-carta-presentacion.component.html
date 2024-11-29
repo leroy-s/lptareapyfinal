@@ -1,0 +1,165 @@
+<h4 style="font-size: 1em; font-weight: bold; text-align: left; margin: 0; padding-left: 1rem; margin-top: -0rem;">
+  Gestionar carta de presentación
+</h4>
+<!-- Botón de Regresar -->
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+    <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button" (click)="onBack()"
+              [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+    </p-button>
+</div>
+  <!-- Barra horizontal -->
+<div
+class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3"
+style="width: 100%; max-width: 10000px; margin-top: 0.5rem;">
+</div>
+
+
+<div
+  class="flex gap-3 justify-content-start align-items-start mt-3"
+  style="width: 100%; height: 100%;">
+
+  <!-- Contenedor de cartas (lado izquierdo) -->
+  <div
+    class="surface-50 border-round shadow-2 p-3 flex flex-column gap-2"
+    style="width: 300px; height: 500px; font-size: 0.8rem;">
+
+    <!-- Título -->
+    <h3 class="mb-2 mt-0" style="font-size: 1rem;">Mi Carta</h3>
+
+    <!-- Lista de cartas -->
+    <div *ngIf="cartaGuardada" class="surface-100 border-round shadow-1 p-2 flex justify-content-between align-items-center" style="font-size: 0.8rem;">
+      <div>
+        <div><b>Empresa:</b> {{ cartaGuardada.razonSocial }}</div>
+        <div><b>RUC:</b> {{ cartaGuardada.ruc }}</div>
+        <div><b>Área:</b> {{ cartaGuardada.areaPracticaNombre }}</div>
+      </div>
+      <div class="circle" [ngClass]="{'bg-yellow-400': cartaGuardada.estado === '1', 'bg-gray-400': cartaGuardada.estado !== '1'}"
+           style="width: 20px; height: 20px; border-radius: 50%;">
+      </div>
+    </div>
+  </div>
+
+  <div class="surface-50 border-round shadow-2 p-3 flex flex-column gap-2"
+  style="width: 800px; height: 500px; font-size: 0.85rem;">
+
+  <!-- Título principal -->
+  <h3 class="mb-2 mt-0" style="font-size: 1rem;">Crear nueva carta de presentación</h3>
+
+  <!-- Verifica si el formulario debe ser visible -->
+  <div *ngIf="!formularioVisible" class="flex justify-content-center align-items-center" style="height: 100%;">
+    <button pButton type="button" label="Empezar prácticas" (click)="comenzarPracticas()" 
+            style="font-size: 1rem; height: 40px; width: 180px;">
+    </button>
+  </div>
+
+  <!-- Formulario solo se muestra cuando formularioVisible es true -->
+  <div *ngIf="formularioVisible">
+    <!-- Resto del formulario -->
+    <div class="flex gap-2">
+      <div class="flex flex-column w-6">
+        <label for="ruc">RUC de la empresa</label>
+        <input id="ruc" type="text" pInputText [(ngModel)]="carta.ruc" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+      <div class="flex flex-column w-6">
+        <label for="nombreEmpresa">Nombre de la empresa</label>
+        <input id="nombreEmpresa" type="text" pInputText [(ngModel)]="carta.razonSocial" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <div class="flex flex-column w-6">
+        <label for="areaPracticas">Área de prácticas</label>
+        <input id="areaPracticas" type="text" pInputText [(ngModel)]="carta.nombreArea" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+      <div class="flex flex-column w-6">
+        <label for="direccion">Dirección física de la empresa</label>
+        <input id="direccion" type="text" pInputText [(ngModel)]="carta.direccion" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+    </div>
+
+    <div class="flex flex-column">
+      <label for="descripcion">Descripción de las actividades</label>
+      <textarea id="descripcion" pInputTextarea [(ngModel)]="carta.descripcion" rows="2"
+                style="width: 100%; height: 50px; font-size: 0.85rem;"></textarea>
+    </div>
+
+    <div class="flex gap-2">
+      <div class="flex flex-column w-6">
+        <label for="descripcionArea">Descripción del área de prácticas</label>
+        <input id="descripcionArea" type="text" pInputText [(ngModel)]="carta.descripcionArea" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+      <div class="flex flex-column w-6">
+        <label for="nombreLinea">Nombre de la línea de trabajo</label>
+        <input id="nombreLinea" type="text" pInputText [(ngModel)]="carta.nombreLinea" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+    </div>
+
+    <h4 class="mt-2 mb-2" style="font-size: 1rem;">Descripción de Representante</h4>
+    <div class="flex gap-2">
+      <div class="flex flex-column w-6">
+        <label for="nombres">Nombres</label>
+        <input id="nombres" type="text" pInputText [(ngModel)]="carta.nombreRepresentante" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+      <div class="flex flex-column w-6">
+        <label for="apellidos">Apellidos</label>
+        <input id="apellidos" type="text" pInputText [(ngModel)]="carta.apellidoRepresentante" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <div class="flex flex-column w-6">
+        <label for="cargo">Cargo</label>
+        <input id="cargo" type="text" pInputText [(ngModel)]="carta.cargoRepresentante" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+      <div class="flex flex-column w-6">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" type="text" pInputText [(ngModel)]="carta.telefonoRepresentante" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <div class="flex flex-column w-6">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" type="email" pInputText [(ngModel)]="carta.correoRepresentante" 
+               style="width: 100%; height: 30px; font-size: 0.85rem;" />
+      </div>
+      <div class="flex justify-content-end align-items-center w-6">
+        <button pButton type="button" label="Solicitar validación" class="p-button-primary"
+                (click)="solicitarValidacion()" style="font-size: 0.85rem; height: 40px; width: 120px;">
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensajes de estado -->
+    <div class="flex flex-column gap-2">
+      <div *ngIf="mensajeExito" class="p-2 bg-green-100 text-green-700 border-round">
+        {{ mensajeExito }}
+      </div>
+      <div *ngIf="mensajeError" class="p-2 bg-red-100 text-red-700 border-round">
+        {{ mensajeError }}
+      </div>
+    </div>
+
+    <!-- Indicador de carga -->
+    <div *ngIf="loading" class="flex align-items-center justify-content-center"
+         style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+      <p-progressSpinner strokeWidth="4"
+                        [style]="{width: '50px', height: '50px'}"
+                        styleClass="custom-spinner">
+      </p-progressSpinner>
+      <span class="ml-2">Cargando...</span>
+    </div>
+
+  </div>
+
+</div>

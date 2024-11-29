@@ -1,0 +1,161 @@
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+    <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button" (click)="onBack()" 
+              [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+    </p-button>
+  </div>
+  
+  <div class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3">
+    <button pButton [label]="selectedCarrera ? selectedCarrera.carrera : 'Seleccionar Carrera'"
+            icon="pi pi-chevron-down" class="p-button-sm"
+            (click)="showCarreraDialog()"></button>
+  
+    <span class="divider"></span>
+    <span class="role-label">{{ currentRole.nombre }}</span>
+  
+    <div class="navigation-buttons flex align-items-center gap-2">
+        <button pButton icon="pi pi-angle-left" class="p-button-text p-button-sm" (click)="previousRole()"></button>
+        <button pButton icon="pi pi-angle-right" class="p-button-text p-button-sm" (click)="nextRole()"></button>
+    </div>
+  
+    <div class="flex align-items-center gap-2 ml-auto">
+        <label for="search">Buscar</label>
+        <input pInputText id="search" placeholder="Buscar" class="p-inputtext-sm" [(ngModel)]="searchQuery" />
+    </div>
+  </div>
+  
+  <p-dialog header="Seleccionar Carrera" [(visible)]="carreraDialogVisible" [modal]="true" [style]="{width: '30vw'}" [closable]="false">
+    <p-dropdown [options]="facultades" [(ngModel)]="selectedFacultad"
+                placeholder="Selecciona una facultad"
+                (onChange)="loadCarrerasByFacultad()"
+                styleClass="w-full"
+                optionLabel="nombre">
+    </p-dropdown>
+  
+    <p-listbox *ngIf="carreras.length > 0"
+               [options]="carreras"
+               [(ngModel)]="selectedCarrera"
+               optionLabel="carrera"
+               styleClass="w-full mt-3">
+    </p-listbox>
+  
+    <div class="flex justify-content-end mt-3">
+        <button pButton label="Confirmar" icon="pi pi-check" class="p-button-sm p-button-success" (click)="confirmSelection()"></button>
+        <button pButton label="Cancelar" icon="pi pi-times" class="p-button-sm p-button-secondary ml-2" (click)="cancelSelection()"></button>
+    </div>
+  </p-dialog>
+  
+  <div class="main-container">
+
+    <!-- Contenedor principal del formulario -->
+    <div class="persona-form-container surface-50 border-round shadow-2">
+      <div class="p-fluid grid formgrid compact-form">
+        <div class="field col-12 mb-1">
+          <label for="apellidos">Apellidos:</label>
+          <input pInputText id="apellidos" [(ngModel)]="persona.apellido" class="input-field" />
+        </div>
+  
+        <div class="field col-12 mb-1">
+          <label for="nombres">Nombres:</label>
+          <input pInputText id="nombres" [(ngModel)]="persona.nombre" class="input-field" />
+        </div>
+  
+        <div class="field col-6 mb-1">
+          <label for="dni">DNI:</label>
+          <input pInputText id="dni" [(ngModel)]="persona.dni" class="input-field" />
+        </div>
+  
+        <div class="field col-6 mb-1">
+          <label for="telefono">Teléfono:</label>
+          <input pInputText id="telefono" [(ngModel)]="persona.telefono" class="input-field" />
+        </div>
+  
+        <div class="field col-12 mb-1">
+          <label for="correo">Correo:</label>
+          <input pInputText id="correo" [(ngModel)]="persona.correo" class="input-field" />
+        </div>
+  
+  
+        <div class="field col-10 mb-1">
+          <label for="usuario">Generar usuario:</label>
+          <input pInputText id="usuario" [(ngModel)]="usuario.usuario" class="input-field" />
+        </div>
+  
+        <div class="field col-2 flex align-items-center justify-content-center">
+          <button pButton icon="pi pi-refresh" class="p-button-text p-button-sm refresh-button" (click)="generateUser()"></button>
+        </div>
+      </div>
+  
+      <div class="text-left mt-1">
+        <button pButton label="Confirmar" class="confirm-button p-button-sm" (click)="openConfirmDialog()"></button>
+      </div>
+  
+      <h5 class="mt-4">Usuarios Temporales</h5>
+      <div class="p-3 mt-3 compact-list">
+        <div *ngFor="let item of temporaryUsers; let i = index" class="list-item">
+          <div class="flex align-items-center">
+            <p-avatar label="{{ item.nombre.charAt(0) }}" class="mr-2 avatar"></p-avatar>
+            <span>{{ item.nombre }} {{ item.apellido }}</span>
+          </div>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-danger p-button-sm delete-button" (click)="removeFromTemporaryList(i)"></button>
+        </div>
+      </div>
+  
+      <button pButton icon="pi pi-send" class="floating-button p-button-rounded p-button-outlined p-button-sm" (click)="confirmUsers()"></button>
+    </div>
+  
+    <!-- Subventana (diálogo) que aparecerá al confirmar -->
+    <p-dialog header="Confirmación" [(visible)]="confirmDialogVisible" [modal]="true" [style]="{width: '50vw'}" [closable]="false">
+      <ng-container *ngIf="currentRole.nombre === 'DIRECTOR'">
+        <div class="field col-12 mb-1">
+          <label>Firma Digital:</label>
+          <input type="file" accept="image/*" class="p-inputtext p-component w-full" (change)="handleFileUpload($event, 'firma')" />
+        </div>
+  
+        <div class="field col-12 mb-1">
+          <label>Sello de Director:</label>
+          <input type="file" accept="image/*" class="p-inputtext p-component w-full" (change)="handleFileUpload($event, 'sello')" />
+        </div>
+      </ng-container>
+  
+      <div class="flex justify-content-end mt-3">
+        <button pButton label="Confirmar" icon="pi pi-check" class="p-button-sm p-button-success" (click)="onConfirmDialog()"></button>
+        <button pButton label="Cancelar" icon="pi pi-times" class="p-button-sm p-button-secondary ml-2" (click)="onCancelDialog()"></button>
+      </div>
+    </p-dialog>
+  
+    <!-- Contenedor de la lista de usuarios -->
+    <div class="user-list-container surface-50 border-round shadow-2">
+      <p-table [value]="usuarios" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'" styleClass="compact-table">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-usuario>
+          <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido }}</td>
+            <td>{{ usuario.dni }}</td>
+            <td>{{ usuario.telefono }}</td>
+            <td>
+              <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm p-button-primary" (click)="editarUsuario(usuario)"></button>
+              <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="eliminarUsuario(usuario.id)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">No se encontraron usuarios para el rol seleccionado</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  
+  </div>
+  

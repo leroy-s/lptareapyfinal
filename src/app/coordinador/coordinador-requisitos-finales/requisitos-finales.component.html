@@ -1,0 +1,31 @@
+
+<div class="card carta-presentacion-container">
+    <div class="header">
+      <div class="header-icon">
+        <img src="icons/image 52.png" alt="Requisitos Finales" />
+      </div>
+      <div class="header-text">
+        <div class="details">
+            <h3>Requisitos finales {{ semestre }}</h3>
+            <p>Estado: {{ requisitosEstado }}</p>
+            <p>Datos del tutor empresarial: {{ tutorEmpresarialEstado }}</p>
+          </div>
+      </div>
+      <i class="pi pi-arrow-left go-back" (click)="goBack()"></i>
+    </div>
+  
+    <div *ngIf="missingDataMessage; else dataContent" class="missing-data-container">
+      <i class="pi pi-exclamation-circle icon-warning"></i>
+      <p>{{ missingDataMessage }}</p>
+    </div>
+  
+    <ng-template #dataContent>
+      <!-- Aquí iría el contenido dinámico obtenido de las APIs -->
+    </ng-template>
+  
+    <div class="actions">
+      <button class="reject-button ">rechazar</button>
+      <button class="validate-button ">aceptar datos</button>
+    </div>
+  </div>
+  

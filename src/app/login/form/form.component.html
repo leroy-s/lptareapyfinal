@@ -1,0 +1,63 @@
+<div class="login-container flex align-items-center justify-content-center" style="height: 100%; width: 100%;">
+  <div class="card shadow-5 p-4 login-box" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1)); backdrop-filter: blur(10px); border-radius: 10px;">
+    <div class="text-center mb-4">
+      <img src="icons/logologin.png" alt="Logo" class="topbar-logo" style=" height: 80px; width:  auto;">
+    </div>
+    <h3 class="text-center">INICIAR SESIÓN</h3>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="p-fluid">
+        <div class="field mb-3">
+          <label for="username">Usuario</label>
+          <input
+            id="username"
+            type="text"
+            pInputText
+            [(ngModel)]="loginData.username"
+            name="username"
+            required
+            #username="ngModel"
+            style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); border-radius: 5px; padding: 10px;">
+          <small class="p-error" *ngIf="username.invalid && (username.dirty || username.touched)">
+            Usuario es requerido
+          </small>
+        </div>
+
+        <div class="field mb-3">
+          <label for="password">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            pInputText
+            [(ngModel)]="loginData.password"
+            name="password"
+            required
+            #password="ngModel"
+            style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); border-radius: 5px; padding: 10px;">
+          <small class="p-error" *ngIf="password.invalid && (password.dirty || password.touched)">
+            Contraseña es requerida
+          </small>
+        </div>
+
+        <div class="field-checkbox mb-4">
+          <p-checkbox
+            [(ngModel)]="loginData.remember"
+            [binary]="true"
+            name="remember"
+            label="Recordarme">
+          </p-checkbox>
+        </div>
+
+        <button
+          pButton
+          type="submit"
+          label="Ingresar"
+          icon="pi pi-sign-in"
+          [loading]="loading"
+          [disabled]="loginForm.invalid || loading"
+          class="w-full p-button-warning">
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

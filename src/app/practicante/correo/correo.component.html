@@ -1,0 +1,62 @@
+<h4 style="font-size: 1em; font-weight: bold; text-align: left; margin: 0; padding-left: 1rem; margin-top: -0rem;">Correo</h4>
+<!-- Botón de Regresar -->
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+    <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button" (click)="onBack()" 
+              [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+    </p-button>
+</div>
+
+<div 
+class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3" 
+style="width: 100%; max-width: 10000px; margin-top: 0.5rem;">
+  
+  <!-- Dropdown con texto centrado -->
+  <p-dropdown 
+  [options]="years" 
+  [(ngModel)]="selectedYear" 
+  [style]="{'width': '250px', 'height': '33px'}" 
+  styleClass="text-left" 
+  placeholder="Seleccionar">
+</p-dropdown>
+</div>
+
+<div class="surface-50 border-round shadow-1 p-3 mt-3" style="height: 500px; width: 100%; overflow-y: auto;">
+    <!-- Encabezado -->
+    <h5 style="margin-bottom: 1rem;">Bandeja de entrega (correo autorizados)</h5>
+    
+   
+    
+    <!-- Lista de chats -->
+    <div class="flex flex-column gap-3">
+        <!-- Chat item -->
+        <div class="flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ccc;">
+            <div class="flex align-items-center gap-2">
+                <i class="pi pi-user" style="font-size: 1.5em; color: #0033cc;"></i>
+                <span>BCP</span>
+                <i class="pi pi-exclamation-circle" style="font-size: 0.8em; color: #ffa500;"></i>
+            </div>
+            <button pButton label="add" style="background-color: #0033cc; color: white; font-size: 0.9em;"></button>
+        </div>
+        
+        <!-- Chat item -->
+        <div class="flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ccc;">
+            <div class="flex align-items-center gap-2">
+                <i class="pi pi-user" style="font-size: 1.5em; color: #0033cc;"></i>
+                <span>Municip...</span>
+                <i class="pi pi-exclamation-circle" style="font-size: 0.8em; color: #ffa500;"></i>
+            </div>
+            <button pButton label="add" style="background-color: #0033cc; color: white; font-size: 0.9em;"></button>
+        </div>
+        
+        <!-- Chat item -->
+        <div class="flex align-items-center justify-content-between p-2" style="border-bottom: 1px solid #ccc;">
+            <div class="flex align-items-center gap-2">
+                <i class="pi pi-user" style="font-size: 1.5em; color: #0033cc;"></i>
+                <span>Tesla</span>
+            </div>
+            <button pButton label="add" style="background-color: #0033cc; color: white; font-size: 0.9em;"></button>
+        </div>
+    </div>
+</div>
+
+  

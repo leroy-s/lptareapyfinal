@@ -1,0 +1,98 @@
+.main-container {
+  gap: 20px;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #004080;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #004080;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.p-field label {
+  font-weight: bold;
+  color: #004080;
+}
+
+.p-datatable th {
+  background-color: #004080;
+  color: #fff;
+  text-align: left;
+}
+
+.p-datatable td {
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+}
+
+.p-button-success {
+  background-color: #004080 !important;
+  border-color: #004080 !important;
+}
+
+.p-button-info {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+}
+
+.p-button-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+.tabla-registros {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  gap: 20px;
+}
+
+.left-panel, .right-panel {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.card {
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

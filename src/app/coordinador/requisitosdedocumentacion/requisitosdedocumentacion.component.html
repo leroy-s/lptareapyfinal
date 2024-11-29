@@ -1,0 +1,73 @@
+<div class="container">
+    <!-- Panel izquierdo: Lista de practicantes EP -->
+    <div class="left-panel">
+      <h1 class="search-title">Practicantes</h1>
+      <div class="search-bar">
+        <div class="input-wrapper">
+          <i class="search-icon fa fa-search"></i>
+          <input
+            type="text"
+            placeholder="Buscar por nombre, apellido o línea..."
+            [(ngModel)]="searchQuery"
+            (input)="filterPracticantes()"
+          />
+        </div>
+      </div>
+  
+      <ul class="practicante-list">
+        <li
+          *ngFor="let practicante of filteredPracticantes"
+          class="practicante-card"
+          [class.selected]="practicante === practicanteSeleccionado"
+          (click)="seleccionarPracticante(practicante)"
+        >
+          <div class="avatar">
+            {{ obtenerIniciales(practicante.practicantes.personas.nombre, practicante.practicantes.personas.apellido) }}
+          </div>
+          <div class="details">
+            <p class="name">{{ practicante.practicantes.personas.nombre }} {{ practicante.practicantes.personas.apellido }}</p>
+            <small class="semestre">Semestre: {{ practicante.semestre }}</small>
+            <small class="linea">Línea: {{ practicante.escuelasprofesionales.carrera }}</small>
+          </div>
+        </li>
+      </ul>
+  
+      <div class="no-data-message" *ngIf="filteredPracticantes.length === 0">
+        No se encontraron resultados para "{{ searchQuery }}"
+      </div>
+    </div>
+  
+    <!-- Panel derecho: Documentos del practicante seleccionado -->
+    <div class="right-panel">
+      <h2 *ngIf="practicanteSeleccionado">
+        Documentos de {{ practicanteSeleccionado.practicantes.personas.nombre }}
+      </h2>
+      <div *ngIf="practicanteSeleccionado; else noPracticante" class="documentos-container">
+        <div *ngFor="let doc of documentos" class="documento-card">
+          <div class="documento-info">
+            <img class="documento-icon" src="assets/pdf-icon.png" alt="Documento" />
+            <div>
+              <p class="documento-titulo">{{ doc.tipoDocumento.nombre_doc }}</p>
+              <small class="documento-fecha">Fecha: {{ doc.fechaGenerada | date: 'shortDate' }}</small>
+            </div>
+          </div>
+          <div class="acciones">
+            <button
+              class="btn validar"
+              [class.validado]="doc.estado === '1'"
+              (click)="validarDocumento(doc)"
+            >
+              {{ doc.estado === '0' ? 'Validar' : 'Validado' }}
+            </button>
+            <button class="btn comentarios" (click)="agregarComentario(doc)">
+              Comentarios
+            </button>
+          </div>
+        </div>
+      </div>
+      <ng-template #noPracticante>
+        <div class="no-data-message">Selecciona un practicante para ver sus documentos.</div>
+      </ng-template>
+    </div>
+  </div>
+  

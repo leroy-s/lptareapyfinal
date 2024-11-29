@@ -1,0 +1,26 @@
+<div class="requerimientos-container">
+  <h3>Requerimientos de PPP</h3>
+  <div class="buttons-container">
+    <button class="btn" [class.active]="currentView === 'comienzoppp'" (click)="setView('comienzoppp')">
+      Comienzo de PPP
+    </button>
+    <button class="btn" [class.active]="currentView === 'seguimientodeusuario'" (click)="setView('seguimientodeusuario')">
+      Seguimiento de Usuario
+    </button>
+    <button class="btn" [class.active]="currentView === 'requisitosdedocumentacion'" (click)="setView('requisitosdedocumentacion')">
+      Requisitos de Documentación
+    </button>
+  </div>
+</div>
+
+<div class="content-container">
+  <div *ngIf="currentView === 'comienzoppp'">
+    <app-comienzoppp></app-comienzoppp>
+  </div>
+  <div *ngIf="currentView === 'seguimientodeusuario'">
+    <app-seguimientodeusuario></app-seguimientodeusuario>
+  </div>
+  <div *ngIf="currentView === 'requisitosdedocumentacion'">
+    <app-requisitosdedocumentacion></app-requisitosdedocumentacion>
+  </div>
+</div>

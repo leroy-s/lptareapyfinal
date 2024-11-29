@@ -1,0 +1,161 @@
+/* Barra superior */
+.topbar {
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  height: 50px;
+  background-color: #002B55;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-toggle-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.topbar-logo {
+  height: 30px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.username {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Barra lateral */
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #002B55;
+  color: #ffffff;
+  position: fixed;
+  top: 50px; /* Para dejar espacio para la barra superior */
+  left: 0;
+  height: calc(100vh - 50px); /* Ajuste para la barra superior */
+  transition: width 0.3s ease;
+}
+
+.sidebar-container.collapsed {
+  width: 70px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo-img {
+  width: 100px;
+  transition: width 0.3s ease;
+}
+
+.sidebar-container.collapsed .logo-img {
+  width: 50px;
+}
+
+.menu-items {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para los elementos de menú */
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Icono en los elementos de menú */
+.menu-item i {
+  font-size: 1.2rem;
+  margin-right: 7px;
+}
+
+/* Efecto de degradado al pasar el cursor */
+.menu-item:hover {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+}
+
+/* Estilo para la opción seleccionada */
+.menu-item.selected {
+  background-color: rgba(255, 255, 255, 0.2); /* Resalta el fondo del elemento seleccionado */
+  font-weight: bold;
+}
+
+/* Texto de los elementos de menú */
+.menu-text {
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;       /* Evita que el texto se divida en varias líneas */
+  overflow: hidden;          /* Oculta cualquier texto que se desborde del contenedor */
+  text-overflow: ellipsis;   /* Agrega puntos suspensivos al final del texto cuando es muy largo */
+  max-width: 100%;           /* Asegura que el ancho máximo sea el del contenedor */
+}
+
+.sidebar-container.collapsed .menu-text {
+  display: none;
+}
+
+/* Opción de Ajustes en la parte inferior */
+.menu-footer {
+  padding: 15px;
+}
+
+/* Contenido principal */
+.main-content {
+  margin-top: 70px; /* Altura de la barra superior */
+  margin-left: 200px; /* Espacio para la barra lateral */
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-container.collapsed + .main-content {
+  margin-left: 70px;
+}
+
+/* Oculta la barra de desplazamiento en todo el cuerpo */
+body {
+  overflow: hidden;
+}
+/* Botón de Cerrar sesión sin estilos adicionales */
+.logout-button {
+  background-color: white; /* Fondo blanco */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cursor de botón */
+  padding: 8px 16px; /* Espaciado para que funcione como botón */
+}

@@ -1,0 +1,82 @@
+<div class="container">
+    
+    
+    <div class="left-panel">
+        <h1 class="search-title">Practicantes</h1>
+        <div class="search-bar">
+            <div class="input-wrapper">
+              <i class="search-icon fa fa-search"></i>
+              <input
+                type="text"
+                placeholder="Buscar por nombre, apellido o línea..."
+                [(ngModel)]="searchQuery"
+                (input)="filterPracticantes()"
+              />
+            </div>
+          </div>
+          
+        <ul class="practicante-list">
+            <li *ngFor="let practicante of filteredPracticantes" (click)="selectPracticante(practicante)"
+                [class.selected]="practicante.id === selectedPracticante?.id">
+                <div class="avatar">{{ practicante.practicantes.personas.nombre[0] }}</div>
+                <div class="details">
+                    <span class="name">{{ practicante.practicantes.personas.nombre }} {{
+                        practicante.practicantes.personas.apellido }}</span>
+                    <span class="linea">{{ practicante.escuelasprofesionales.carrera }}</span>
+                </div>
+            </li>
+        </ul>
+
+
+        <div class="no-results" *ngIf="!filteredPracticantes || filteredPracticantes.length === 0">
+            No se encontraron resultados para "{{ searchQuery }}"
+        </div>
+    </div>
+    <div class="right-panel">
+        <!-- Mostrar opciones si no hay vista activa -->
+        <div *ngIf="!currentView" class="card-container">
+          <!-- Carta de Presentación -->
+          <div class="card" (click)="setView('carta-presentacion')">
+            <div class="card-content">
+              <img src="icons/image 51.png" alt="Carta de Presentación" />
+              <div class="details">
+                <h3>Carta de presentación</h3>
+                <p>Estado: {{ cartaPresentacionEstado }}</p>
+              </div>
+              <i class="fa fa-chevron-right"></i>
+            </div>
+          </div>
+    
+          <!-- Requisitos Finales -->
+          <div class="card" (click)="setView('requisitos-finales')">
+            <div class="card-content">
+              <img src="icons/image 52.png" alt="Requisitos Finales" />
+              <div class="details">
+                <h3>Requisitos finales {{ semestre }}</h3>
+                <p>Estado: {{ requisitosEstado }}</p>
+                <p>Datos del tutor empresarial: {{ tutorEmpresarialEstado }}</p>
+              </div>
+              <i class="fa fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Contenido dinámico de "Carta de presentación" -->
+        <div class="content-container" *ngIf="currentView === 'carta-presentacion'">
+            <button class="back-button" (click)="setView(null)" style="display: flex; align-items: center; padding: 8px 12px; background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px; color: #495057; cursor: pointer;">
+                <i class="fa fa-arrow-left" style="margin-right: 8px;"></i> Atrás
+              </button>
+              
+          <app-carta-presentacion></app-carta-presentacion>
+        </div>
+    
+        <!-- Contenido dinámico de "Requisitos finales" -->
+        <div class="content-container" *ngIf="currentView === 'requisitos-finales'">
+          <button class="back-button" (click)="setView(null)" style="display: flex; align-items: center; padding: 8px 12px; background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px; color: #495057; cursor: pointer;">
+  <i class="fa fa-arrow-left" style="margin-right: 8px;"></i> Atrás
+</button>
+
+          <app-requisitos-finales></app-requisitos-finales>
+        </div>
+      </div>
+</div>

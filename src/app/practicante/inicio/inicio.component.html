@@ -1,0 +1,156 @@
+<h4 style="font-size: 1em; font-weight: bold; text-align: left; margin: 0; padding-left: 1rem; margin-top: -0rem;">Inicio</h4>
+<!-- Botón de Regresar -->
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+    <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button" (click)="onBack()" 
+              [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+    </p-button>
+</div>
+
+<!-- Filtro con pestañas -->
+<div 
+  class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3"
+  style="width: 100%; max-width: 10000px; margin-top: 0.5rem;">
+  <!-- Tab 1: Calendario de evaluaciones -->
+  <div
+    class="p-2 border-round flex align-items-center justify-content-center"
+    [ngStyle]="{
+      'background-color': activeTab === 'calendario' ? '#4b4b4b' : '#e0e0e0',
+      'color': activeTab === 'calendario' ? '#ffffff' : '#6c757d',
+      'border': activeTab === 'calendario' ? '1px solid #3a3a3a' : '1px solid #d6d6d6',
+      'cursor': 'pointer',
+      'font-weight': 'bold',
+      'font-size': '0.85rem',
+      'padding': '0.3rem 0.8rem'
+    }"
+    (click)="selectTab('calendario')">
+    Calendario de evaluaciones
+  </div>
+
+  <!-- Tab 2: Seguimiento de usuario -->
+  <div
+    class="p-2 border-round flex align-items-center justify-content-center"
+    [ngStyle]="{
+      'background-color': activeTab === 'seguimiento' ? '#4b4b4b' : '#e0e0e0',
+      'color': activeTab === 'seguimiento' ? '#ffffff' : '#6c757d',
+      'border': activeTab === 'seguimiento' ? '1px solid #3a3a3a' : '1px solid #d6d6d6',
+      'cursor': 'pointer',
+      'font-weight': 'bold',
+      'font-size': '0.85rem',
+      'padding': '0.3rem 0.8rem'
+    }"
+    (click)="selectTab('seguimiento')">
+    Seguimiento de usuario
+  </div>
+</div>
+
+<!-- Contenido dinámico -->
+<div *ngIf="activeTab === 'calendario'" class="mt-4">
+  <!-- Cabecera del calendario -->
+  <div class="flex justify-content-between align-items-center p-3" style="background-color: #003366; color: white;">
+    <h4 style="margin: 0;">Horario</h4>
+    <div class="flex gap-2">
+      <div class="p-2 border-round" style="background-color: #42a5f5; color: white; cursor: pointer;">reuniones</div>
+      <div class="p-2 border-round" style="background-color: #ff7043; color: white; cursor: pointer;">fin de rubro</div>
+      <div class="p-2 border-round" style="background-color: #66bb6a; color: white; cursor: pointer;">reuniones</div>
+    </div>
+  </div>
+
+  <!-- Calendario -->
+  <div class="p-3 surface-50 border-round shadow-1 mt-3" style="height: auto;">
+    <div class="flex justify-content-between align-items-center">
+      <h5 style="margin: 0;">OCTUBRE 2024</h5>
+      <div class="flex gap-2">
+        <button pButton label="Mes" style="background-color: #4b4b4b; color: white;"></button>
+        <button pButton label="Semana" style="background-color: #4b4b4b; color: white;"></button>
+        <button pButton label="Día" style="background-color: #4b4b4b; color: white;"></button>
+      </div>
+    </div>
+    <!-- Celdas del calendario -->
+    <table class="mt-3" style="width: 100%; border-collapse: collapse; text-align: center; height: 320px;">
+      <thead>
+        <tr>
+          <th>Domingo</th>
+          <th>Lunes</th>
+          <th>Martes</th>
+          <th>Miércoles</th>
+          <th>Jueves</th>
+          <th>Viernes</th>
+          <th>Sábado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="surface-100">29</td>
+          <td class="surface-100">30</td>
+          <td class="surface-100">1</td>
+          <td class="surface-100">2</td>
+          <td class="surface-100">3</td>
+          <td class="surface-100" style="background-color: #e3f2fd;">4</td>
+          <td class="surface-100">5</td>
+        </tr>
+        <tr>
+          <td class="surface-100">6</td>
+          <td class="surface-100">7</td>
+          <td class="surface-100">
+            <i class="pi pi-users" style="color: #42a5f5;"></i>
+          </td>
+          <td class="surface-100">9</td>
+          <td class="surface-100">10</td>
+          <td class="surface-100">11</td>
+          <td class="surface-100">12</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Contenido dinámico -->
+<div *ngIf="activeTab === 'seguimiento'" class="p-3 surface-50 border-round shadow-1 mt-3" style="height: 500px;">
+  <!-- Sección de perfil -->
+  <div class="flex align-items-center gap-2 mb-3 mt-1">
+    <i class="pi pi-user text-2xl"></i> <!-- Icono de usuario más pequeño -->
+    <h6 class="text-md font-semibold">Ángel Leroy Silva Pusma</h6> <!-- Texto más pequeño -->
+</div>
+
+
+  <!-- Grid para tarjetas informativas -->
+<div class="grid grid-cols-12 gap-2" style="height: 120px;"> <!-- Contenedor con 12 columnas -->
+  <div class="col-12 md:col-3"> <!-- Ajuste para un ancho intermedio -->
+    <p-card class="h-full">
+      <div class="text-sm font-bold">Horas</div> <!-- Texto más pequeño -->
+      <div class="text-lg font-bold text-primary">200</div> <!-- Valor principal reducido -->
+      <p-progressBar [value]="80" [style]="{height: '10px'}"></p-progressBar> <!-- Barra de progreso más delgada -->
+    </p-card>
+  </div>
+  <div class="col-12 md:col-3">
+    <p-card class="h-full">
+      <div class="text-sm font-bold">Fecha</div> <!-- Texto más pequeño -->
+      <div class="text-sm">28/10/24 - 28/12/24</div> <!-- Texto de fecha reducido -->
+      <p-progressBar [value]="60" [style]="{ height: '10px'  }"></p-progressBar> <!-- Barra de progreso más delgada -->
+    </p-card>
+  </div>
+  <div class="col-12 md:col-3">
+    <p-card [style]="{ height: '120px' }"> <!-- Ajuste de altura fija -->
+      <div class="text-sm font-bold">Campos</div> <!-- Texto más pequeño -->
+      <ul class="list-none pl-1 mt-1">
+        <li class="flex align-items-center gap-1"><i class="pi pi-check-circle text-sm text-success"></i> Presencial</li>
+        <li class="flex align-items-center gap-1"><i class="pi pi-check-circle text-sm text-success"></i> Redes</li>
+        <li class="flex align-items-center gap-1"><i class="pi pi-check-circle text-sm text-success"></i> Desarrollo Web</li>
+      </ul>
+    </p-card>
+  </div>
+  <div class="col-12 md:col-2" >
+    <p-card class="h-full" [style]="{ white: '20px' }">
+      <div class="text-sm font-bold">Empresa</div> <!-- Texto más pequeño -->
+      <div class="text-sm mt-1 flex align-items-center gap-1">
+        <i class="pi pi-briefcase text-primary"></i> BCP
+      </div>
+    </p-card>
+  </div>
+</div>
+
+  <!-- Sección del gráfico -->
+  <div class="mt-4 flex justify-content-center">
+    <p-chart type="pie" [data]="chartData" class="w-5" style="max-height: 150px; max-width: 150px;"></p-chart> <!-- Gráfico más pequeño -->
+  </div>
+</div>

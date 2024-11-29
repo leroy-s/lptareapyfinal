@@ -1,0 +1,43 @@
+.main-content {
+  position: relative;
+  padding-top: 20px; /* Espacio adicional para el botón */
+  margin-left: 250px; /* Ajusta este valor para que no se sobreponga al menú lateral */
+  }
+
+/* En tu archivo CSS del componente */
+.button-container {
+  position: fixed;
+  top: 45px;
+  right: calc(0px + 2px); /* Ajusta 250px al ancho del menú si es necesario */
+  z-index: 1000;
+}
+.button-container p-button .p-button {
+  width: 6rem !important;
+  padding: 0.3rem !important;
+  font-size: 0.8rem !important;
+}
+.main-container {
+  display: flex;
+  gap: 1rem; /* Ajusta el espacio entre contenedores */
+  padding: 1rem;
+}
+
+
+.campus-faculty-container,
+.school-container {
+  flex: 1;
+  max-width: 900px;
+  height: 450px; /* Ocupa toda la altura del contenedor principal */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Botones al fondo del contenedor */
+}
+
+.school-container {
+  margin-left: auto;
+}
+/* Clase personalizada para el margen entre los botones */
+.custom-margin-right {
+  margin-right: 10px; /* Ajusta este valor según lo necesites */
+}
+

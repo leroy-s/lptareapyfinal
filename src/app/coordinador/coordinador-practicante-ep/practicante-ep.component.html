@@ -1,0 +1,106 @@
+<div class="main-container">
+
+  <div class="content-container">
+  
+    <div class="left-panel">
+      <div class="card">
+        <h2 class="form-title">Registrar Practicante o Tutor</h2>
+        <p class="form-subtitle">Complete los campos requeridos para registrar un nuevo practicante o tutor.</p>
+        
+        <form #registroForm="ngForm" (ngSubmit)="onSubmit()">
+          <!-- Sección: Datos Personales -->
+          <h3 class="section-title">Datos Personales</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input pInputText id="nombre" [(ngModel)]="persona.nombre" name="nombre" required placeholder="Ingrese el nombre" />
+            </div>
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input pInputText id="apellido" [(ngModel)]="persona.apellido" name="apellido" required placeholder="Ingrese el apellido" />
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo Electrónico</label>
+              <input pInputText id="correo" [(ngModel)]="persona.correo_electronico" name="correo" required placeholder="ejemplo@correo.com" />
+            </div>
+            <div class="form-group">
+              <label for="dni">DNI</label>
+              <input pInputText id="dni" [(ngModel)]="persona.dni" name="dni" required placeholder="Ingrese el DNI" />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input pInputText id="telefono" [(ngModel)]="persona.telefono" name="telefono" required placeholder="Ingrese el teléfono" />
+            </div>
+          </div>
+
+          <!-- Sección: Selección de Rol -->
+          <h3 class="section-title">Rol</h3>
+          <div class="form-group">
+            <label for="rol">Seleccionar Rol</label>
+            <p-dropdown [options]="roles" [(ngModel)]="selectedRole" name="rol" placeholder="Seleccione un rol"></p-dropdown>
+          </div>
+
+          <!-- Campos Específicos según el Rol -->
+          <div *ngIf="selectedRole === 'Practicante'">
+            <h3 class="section-title">Detalles del Practicante</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="semestre">Semestre</label>
+                <p-dropdown [options]="semestres" [(ngModel)]="semestre" name="semestre" placeholder="Seleccione un semestre"></p-dropdown>
+              </div>
+              <div class="form-group">
+                <label for="linea">Línea</label>
+                <p-dropdown [options]="lineas" [(ngModel)]="linea" name="linea" placeholder="Seleccione una línea"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="selectedRole === 'Tutor'">
+            <h3 class="section-title">Detalles del Tutor</h3>
+            <div class="form-group">
+              <label for="escuela">Escuela Profesional</label>
+              <p-dropdown [options]="escuelas" [(ngModel)]="escuela" name="escuela" placeholder="Seleccione una escuela"></p-dropdown>
+            </div>
+          </div>
+
+          <button pButton type="submit" label="Registrar" class="p-button-success"></button>
+        </form>
+      </div>
+    </div>
+
+   
+    <div class="right-panel">
+      <div class="card">
+        <h2 class="form-title">Lista de Registrados</h2>
+        <p-table [value]="listaRegistros" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Correo</th>
+              <th>DNI</th>
+              <th>Rol</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-registro>
+            <tr>
+              <td>{{ registro.nombre }}</td>
+              <td>{{ registro.apellido }}</td>
+              <td>{{ registro.correo }}</td>
+              <td>{{ registro.dni }}</td>
+              <td>{{ registro.rol }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <!-- Botones en la Parte Inferior -->
+      <div class="button-container">
+        <input type="file" id="fileInput" accept=".xlsx, .xls" (change)="onImport($event)" style="display: none;" />
+        <button pButton type="button" label="Importar Excel" class="p-button-info" (click)="triggerFileInput()"></button>
+        <button pButton type="button" label="Exportar Plantilla Excel" class="p-button-warning" (click)="onGenerateTemplate()"></button>
+        <button pButton type="button" label="Exportar PDF" class="p-button-warning" (click)="onExportPDF()"></button>
+      </div>
+    </div>
+  </div>
+</div>

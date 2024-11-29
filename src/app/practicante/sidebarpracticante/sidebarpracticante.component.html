@@ -1,0 +1,73 @@
+<!-- Barra superior -->
+<div class="topbar">
+    <div class="topbar-left">
+        <button pButton icon="pi pi-bars" class="menu-toggle-button" (click)="toggleSidebar()"></button>
+        <img src="icons/logo.png" alt="Logo" class="topbar-logo">
+    </div>
+    <div class="topbar-right">
+        <i class="pi pi-th-large grid-icon" (click)="overlayPanel.toggle($event)"></i>
+        
+        <span class="font-bold">practicante</span>
+        <p-avatar image="icons/image.png" shape="circle"></p-avatar>
+        
+        <p-overlayPanel #overlayPanel>
+          <div class="overlay-content">
+            <!-- Botón de Cerrar sesión sin estilos adicionales -->
+            <button class="logout-button" (click)="onLogout()">Cerrar sesión</button>
+        </div>
+        </p-overlayPanel>
+    </div>
+</div>
+
+
+
+<!-- Barra lateral -->
+<div class="sidebar-container" [ngClass]="{'collapsed': isCollapsed}">
+    <div class="menu-items">
+      <a
+        [routerLink]="['./inicio']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'inicio'}"
+        (click)="selectItem('inicio')">
+        <i class="pi pi-envelope p-mr-2"></i>
+        <span class="menu-text">inicio</span>
+      </a>
+      <a
+        [routerLink]="['./cartappp']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'cartappp'}"
+        (click)="selectItem('cartappp')">
+        <i class="pi pi-book p-mr-2"></i>
+        <span class="menu-text">gestionar carta de presentación</span>
+      </a>
+      <a
+        [routerLink]="['./documentacion']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'documentacion'}"
+        (click)="selectItem('documentacion')">
+        <i class="pi pi-envelope p-mr-2"></i>
+        <span class="menu-text">Administrar Documentación</span>
+      </a>
+      <a
+        [routerLink]="['./evaluaciones']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'evaluaciones'}"
+        (click)="selectItem('evaluaciones')">
+        <i class="pi pi-book p-mr-2"></i>
+        <span class="menu-text">Mis evaluaciones</span>
+      </a>
+      <a
+        [routerLink]="['./correo']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'correo'}"
+        (click)="selectItem('correo')">
+        <i class="pi pi-book p-mr-2"></i>
+        <span class="menu-text">correo</span>
+      </a>
+    </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,65 @@
+<!-- Barra superior -->
+<div class="topbar">
+  <div class="topbar-left">
+      <button pButton icon="pi pi-bars" class="menu-toggle-button" (click)="toggleSidebar()"></button>
+      <img src="icons/logo.png" alt="Logo" class="topbar-logo">
+  </div>
+  <div class="topbar-right">
+      <i class="pi pi-th-large grid-icon" (click)="overlayPanel.toggle($event)"></i>
+
+      <span class="font-bold">Administrador</span>
+      <p-avatar image="icons/image.png" shape="circle"></p-avatar>
+
+      <p-overlayPanel #overlayPanel>
+          <div class="overlay-content">
+            <!-- Botón de Cerrar sesión sin estilos adicionales -->
+            <button class="logout-button" (click)="onLogout()">Cerrar sesión</button>
+        </div>
+      </p-overlayPanel>
+  </div>
+</div>
+
+
+
+<!-- Barra lateral -->
+<div class="sidebar-container" [ngClass]="{'collapsed': isCollapsed}">
+  <div class="menu-items">
+    <a
+      [routerLink]="['./gestion-usuarios']"
+      class="menu-item p-d-flex p-ai-center p-jc-start"
+      [ngClass]="{'selected': selectedItem === 'usuarios'}"
+      (click)="selectItem('usuarios')">
+      <i class="pi pi-user p-mr-2"></i>
+      <span class="menu-text">Gestión de Usuarios</span>
+    </a>
+    <a
+      [routerLink]="['./mantener-facultades']"
+      class="menu-item p-d-flex p-ai-center p-jc-start"
+      [ngClass]="{'selected': selectedItem === 'facultades'}"
+      (click)="selectItem('facultades')">
+      <i class="pi pi-folder-open p-mr-2"></i>
+      <span class="menu-text">Mantener facultades</span>
+    </a>
+    <a
+      [routerLink]="['./elementos']"
+      class="menu-item p-d-flex p-ai-center p-jc-start"
+      [ngClass]="{'selected': selectedItem === 'elementos'}"
+      (click)="selectItem('elementos')">
+      <i class="pi pi-th-large p-mr-2"></i>
+      <span class="menu-text">Mantener elementos</span>
+    </a>
+    <a
+      [routerLink]="['./historial']"
+      class="menu-item p-d-flex p-ai-center p-jc-start"
+      [ngClass]="{'selected': selectedItem === 'historial'}"
+      (click)="selectItem('historial')">
+      <i class="pi pi-history p-mr-2"></i>
+      <span class="menu-text">Historial</span>
+    </a>
+  </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <!-- Lista de documentos -->
+    <div class="documentos-container">
+      <h2 class="header">Recursos</h2>
+      <div class="documento-card" *ngFor="let doc of documentos" (click)="previsualizarDocumento(doc.id)">
+        <img class="icon" src="assets/pdf-icon.png" alt="Icono de Documento" />
+        <p class="tipo">{{ doc.tipoDocumento.nombre_doc }}</p>
+        <p class="fecha">{{ doc.fechaGenerada | date: 'shortDate' }}</p>
+        <div class="acciones">
+          <button class="btn btn-success" (click)="descargarDocumento(doc.id, $event)">
+            Descargar
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Panel de subida -->
+    <div class="upload-panel">
+      <h2>Subir Documento</h2>
+      <div class="upload-actions">
+        <select [(ngModel)]="tipoDocumentoSeleccionado" class="custom-file-label">
+          <option *ngFor="let tipo of tiposDocumentos" [value]="tipo.id">
+            {{ tipo.nombre_doc }}
+          </option>
+        </select>
+  
+        <label class="custom-file-label">
+          <input type="file" (change)="onFileSelected($event)" hidden />
+          Seleccionar archivo
+        </label>
+  
+        <button class="btn btn-upload" (click)="subirDocumento()">Subir</button>
+      </div>
+  
+      <!-- Previsualización del archivo -->
+      <div *ngIf="archivoPreview" class="preview">
+        <iframe [src]="archivoPreview | safeUrl" width="100%" height="300px"></iframe>
+      </div>
+    </div>
+  </div>
+  

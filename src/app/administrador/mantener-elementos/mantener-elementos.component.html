@@ -1,0 +1,158 @@
+<!-- mantener-elementos.component.html -->
+<h4 style="font-size: 1em; font-weight: bold; text-align: left; margin: 0; padding-left: 1rem; margin-top: -2rem;">
+  Mantener Elementos
+</h4>
+
+<!-- Botón de Regresar -->
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+  <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button"
+    [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+  </p-button>
+</div>
+
+<div class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3"
+     style="width: 100%; max-width: 10000px; margin-top: 0.5rem">
+     <p-dropdown id="facultad"
+     [options]="facultades"
+     [(ngModel)]="roleForm.facultadId"
+     optionLabel="nombre"
+     optionValue="id"
+     placeholder="Seleccione una facultad"
+     (onChange)="onFacultadChange($event)"
+     [style]="{'width': '300px'}">
+</p-dropdown>
+
+  <span class="divider"></span>
+
+  <p-dropdown id="escuela"
+  [options]="escuelas"
+  [(ngModel)]="roleForm.escuelaId"
+  optionLabel="carrera"
+  optionValue="id"
+  placeholder="Seleccione una escuela"
+  [style]="{'width': '300px'}"
+  [disabled]="!roleForm.facultadId">
+</p-dropdown>
+
+  <span class="ml-auto" style="font-weight: bold; margin-right: 200px;">Asignación de Roles y Permisos</span>
+</div>
+
+<div class="main-content flex gap-4 mt-3">
+  <!-- Panel izquierdo para el formulario de rol -->
+  <div class="roles-container p-3 surface-50 border-round shadow-2"
+       style="position: relative; width: 100%; max-width: 400px; background-color: #f9f9f9; height: 450px;">
+    <h3 style="font-size: 1rem; font-weight: bold; text-align: center; margin: 0; padding: 0.5rem 0;">
+      Asignar Rol
+    </h3>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 0.5rem 0;" />
+
+    <div class="p-3">
+      <label for="roleEnum">Nombre del Rol</label>
+      <input pInputText
+             id="roleEnum"
+             [(ngModel)]="roleForm.roleEnum"
+             placeholder="Ingrese el nombre exacto del rol"
+             class="w-full mb-3"
+             required>
+    </div>
+  </div>
+
+  <!-- Panel derecho para los permisos -->
+  <div class="empty-container surface-card border-round shadow-2"
+       style="position: relative; width: 100%; max-width: 900px; height: 450px; background-color: #f9f9f9; margin-left: auto;">
+    <div class="p-3">
+      <h4>Permisos Disponibles</h4>
+      <div class="grid">
+        <div *ngFor="let permission of availablePermissions"
+             class="col-12 md:col-6 mb-2">
+          <p-checkbox
+            [value]="permission.name"
+            [(ngModel)]="permission.selected"
+            (onChange)="onPermissionChange(permission.name, permission.selected)"
+            [label]="permission.name">
+          </p-checkbox>
+        </div>
+      </div>
+
+      <div class="flex justify-content-end mt-3">
+        <button pButton
+                label="Limpiar"
+                class="p-button-outlined mr-2"
+                (click)="clearForm()">
+        </button>
+        <button pButton
+                label="Asignar Permisos"
+                class="p-button-primary"
+                (click)="assignRole()">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabla de Asignaciones -->
+<div class="card mt-4">
+  <p-table #dt [value]="roleAssignments" [paginator]="true" [rows]="10"
+           [globalFilterFields]="['roleEnum','facultadNombre','escuelaNombre']"
+           [showCurrentPageReport]="true"
+           currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+           [rowsPerPageOptions]="[10,25,50]"
+           styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between align-items-center">
+        <h5 class="m-0">Asignaciones de Roles</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text"
+                 (input)="onGlobalFilter($event)"
+                 placeholder="Buscar..." />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Rol</th>
+        <th>Facultad</th>
+        <th>Escuela</th>
+        <th>Permisos</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-assignment>
+      <tr>
+        <td>{{assignment.roleEnum}}</td>
+        <td>{{assignment.facultadNombre}}</td>
+        <td>{{assignment.escuelaNombre}}</td>
+        <td>
+          <p-tag *ngFor="let permission of assignment.permissions"
+                 [value]="permission"
+                 class="mr-1">
+          </p-tag>
+        </td>
+        <td>
+          <p-tag [severity]="assignment.estado === 'ACTIVO' ? 'success' : 'danger'"
+                 [value]="assignment.estado">
+          </p-tag>
+        </td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                  (click)="editAssignment(assignment)">
+          </button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                  (click)="deleteAssignment(assignment)">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr></tr>
+        <td colspan="6">No se encontraron registros.</td>
+
+    </ng-template>
+  </p-table>
+</div>
+
+<p-toast></p-toast>
